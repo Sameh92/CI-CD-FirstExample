@@ -1,0 +1,29 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    branches: [master]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Publish
+      run: dotnet publish "CI-CD FirstExample/CI-CD-FirstExample.csproj" -c Release -o C:\Deploy\CI-CD.FirstExample
+
+    - name: Run the app
+      run: |
+        Stop-Process -Name "CI-CD-FirstExample" -Force -ErrorAction SilentlyContinue
+        Start-Process dotnet -ArgumentList "C:\Deploy\CI-CD.FirstExample\CI-CD-FirstExample.dll" -WorkingDirectory "C:\Deploy\CI-CD.FirstExample"
