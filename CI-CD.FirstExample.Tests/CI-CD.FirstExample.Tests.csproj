@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CI-CD FirstExample\CI-CD-FirstExample.csproj" />
+    <ProjectReference Include="..\CI-CD-FirstExample\CI-CD-FirstExample.csproj" />
   </ItemGroup>
 
   <ItemGroup>
