@@ -21,9 +21,9 @@ jobs:
         dotnet-version: '9.0.x'
 
     - name: Publish
-      run: dotnet publish "CI-CD FirstExample/CI-CD FirstExample.csproj" -c Release -o C:\Deploy\CI-CD.FirstExample
+      run: dotnet publish "CI-CD-FirstExample/CI-CD-FirstExample.csproj" -c Release -o C:\Deploy\CI-CD.FirstExample
 
     - name: Run the app
       run: |
-        Stop-Process -Name "CI-CD FirstExample" -Force -ErrorAction SilentlyContinue
+        Stop-Process -Name "CI-CD-FirstExample" -Force -ErrorAction SilentlyContinue
         Start-Process dotnet -ArgumentList "C:\Deploy\CI-CD.FirstExample\CI-CD FirstExample.dll" -WorkingDirectory "C:\Deploy\CI-CD.FirstExample"
